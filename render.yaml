@@ -1,0 +1,11 @@
+services:
+  - name: node-worker
+    buildCommand: |
+      npm install
+      npm install moment -g
+      cd utils/stream && node stream.js
+
+  - name: python-worker
+    buildCommand: |
+      cd client && pip install -r requirements.txt ccxt openpyxl
+      cd ../.. && python main.py
