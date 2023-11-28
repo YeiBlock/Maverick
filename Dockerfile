@@ -1,26 +1,43 @@
-# Use an appropriate Python base image
-FROM python:3.8
+# Stage 1: Build Node.js dependencies
+FROM node:14 AS node_builder
 
 # Set the working directory
 WORKDIR /app
 
-# Copy the entire project to the working directory
-COPY . /app
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
 
 # Install Node.js dependencies
 RUN npm install
 RUN npm install moment -g
 
-# Navigate to the client directory and install Python dependencies
-WORKDIR /app/client
-RUN pip install -r requirements.txt ccxt openpyxl
+# Stage 2: Build Python dependencies
+FROM python:3.9 AS python_builder
 
-# Navigate to the utils/stream directory and run stream.js
-WORKDIR /app/utils/stream
-CMD ["node", "stream.js"]
-
-# Navigate back to the project root directory
+# Set the working directory
 WORKDIR /app
+
+# Copy the entire project to the working directory
+COPY . .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Stage 3: Final image
+FROM python:3.9-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Copy from both Node.js and Python builders
+COPY --from=node_builder /app/node_modules /app/node_modules
+COPY --from=python_builder /app /app
+
+# Set the environment variables
+ENV NODE_ENV production
+
+# Expose the port your app runs on
+EXPOSE 3000
 
 # Run your main Python script (replace with your actual Python script name)
 CMD ["python", "main.py"]
