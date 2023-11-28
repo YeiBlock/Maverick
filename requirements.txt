@@ -1,1 +1,8 @@
-R
+binance-connector
+requests
+websocket-client
+pandas
+colorama
+ccxt
+setuptools
+openpyxl
