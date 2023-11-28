@@ -21,7 +21,8 @@ WORKDIR /app
 COPY . .
 
 # Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r client/requirements.txt
 
 # Stage 3: Final image
 FROM python:3.9-slim
