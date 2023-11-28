@@ -16,7 +16,7 @@ COPY . .
 
 # Navigate to the client directory and install Python dependencies
 WORKDIR /app/client
-RUN pip install -r requirements.txt ccxt openpyxl
+RUN pip install -r requirements.txt
 
 # Navigate to the utils/stream directory and run stream.js
 WORKDIR /app/utils/stream
