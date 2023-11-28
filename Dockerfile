@@ -45,5 +45,3 @@ EXPOSE 3000
 
 # Update the CMD to point to the correct location of main.py
 CMD ["python", "main.py"]
-
-
