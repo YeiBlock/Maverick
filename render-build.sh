@@ -1,11 +1,3 @@
-#!/bin/bash
-
-# This script is used to build your application.
-# Place all the necessary build commands here.
-
-# Navigate to the project root directory
-cd /path/to/your/project
-
 # Install Node.js dependencies
 npm install
 npm install moment -g
