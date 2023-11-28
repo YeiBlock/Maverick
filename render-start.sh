@@ -3,9 +3,6 @@
 # Exit on any error
 set -e
 
-# Navigate to the project root directory
-cd /render/project
-
 # Navigate to the client directory
 cd client
 
@@ -13,7 +10,7 @@ cd client
 node utils/stream/stream.js &
 
 # Navigate back to the project root directory
-cd /render/project
+cd ../..
 
 # Run your main Python script (replace with your actual Python script name)
 python main.py
