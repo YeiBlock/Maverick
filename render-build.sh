@@ -4,7 +4,7 @@ npm install moment -g
 
 # Navigate to the client directory and install Python dependencies
 cd client
-pip install -r requirements.txt ccxt openpyxl
+pip install -r requirements.txt 
 
 # Navigate to the utils/stream directory and run stream.js
 cd ../utils/stream
